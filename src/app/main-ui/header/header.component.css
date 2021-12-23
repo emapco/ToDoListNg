@@ -1,0 +1,27 @@
+.toolbar {
+  border: solid #212529;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4em;
+  display: flex;
+  align-items: center;
+  background-color: #212529;
+  color: white;
+  font-weight: 500;
+  z-index: 100;
+}
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.right-side {
+  position: absolute;
+  right: 0;
+}
+
+
+

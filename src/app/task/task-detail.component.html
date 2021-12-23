@@ -1,0 +1,38 @@
+<h2>{{header}}</h2>
+<mat-card class="main">
+  <section>
+    <h4>Title:
+      <mat-icon (click)="toggleEditTitle()">border_color</mat-icon>
+    </h4>
+    <p *ngIf="!enableEditTitle">{{editTask.title}}</p>
+    <p *ngIf="enableEditTitle"><input type="text" [(ngModel)]="editTask.title"></p>
+  </section>
+  <section>
+    <h4>Description:
+      <mat-icon (click)="toggleEditDescription()">border_color</mat-icon>
+    </h4>
+    <p *ngIf="!enableEditDescription">{{editTask.description}}</p>
+    <p *ngIf="enableEditDescription"><input matInput type="text" [(ngModel)]="editTask.description"></p>
+  </section>
+  <section>
+    <h4>Date:
+      <mat-icon (click)="toggleEditDate()">border_color</mat-icon>
+    </h4>
+    <p *ngIf="!enableEditDate">{{editTask.date | formatDateDisplay}}</p>
+    <div *ngIf="enableEditDate">
+      <mat-form-field>
+        <mat-label>Date:</mat-label>
+        <input matInput [matDatepicker]="picker" (dateChange)="updateDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker [startAt]="editTask.date"></mat-datepicker>
+      </mat-form-field>
+      <div class="timepicker">
+        <ngx-timepicker-field #timepicker [defaultTime]="formatTimeDisplay.transform(editTask.date)"
+                              (timeChanged)="updateTime(timepicker.timepickerTime)">
+        </ngx-timepicker-field>
+      </div>
+    </div>
+  </section>
+  <br>
+  <button mat-raised-button (click)="onSave()">{{action}}</button>
+</mat-card>

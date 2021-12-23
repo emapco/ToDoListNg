@@ -1,0 +1,20 @@
+mat-list-item {
+  color: #212529 !important;
+  text-align: center;
+  justify-content: center !important;
+}
+
+mat-nav-list {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+:host {
+  opacity: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-30%, -70%);
+  transform: translate(-30%, -70%);
+  z-index: 101;
+}

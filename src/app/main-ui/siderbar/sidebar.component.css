@@ -1,0 +1,20 @@
+#content {
+  position: fixed;
+  top: 4em;
+  width: 160px;
+  height: calc(100vh - 4em);
+  background: #212529;
+  color: white;
+  z-index: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+p {
+  padding: 12px 15px;
+}
+
+.icon-list-item {
+  padding: 0 .4em;
+}
