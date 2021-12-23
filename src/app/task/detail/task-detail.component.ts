@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from "./task";
-import {FormatTimeDisplayPipe} from "../shared/format-time-display.pipe";
+import {Task} from "../task";
+import {FormatTimeDisplayPipe} from "../../shared/format-time-display.pipe";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 @Component({
@@ -21,7 +21,7 @@ export class TaskDetailComponent implements OnInit {
   constructor(public formatTimeDisplay: FormatTimeDisplayPipe) { }
 
   ngOnInit() {
-    this._editTask = Task.fromSelf(this.task);
+    this._editTask = Task.fromSelfCopy(this.task);
   }
 
   toggleEditTitle() {

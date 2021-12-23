@@ -1,9 +1,12 @@
+let nextID: number = 1;
 export class Task {
+  private _id: number;
   private _title: string;
   private _description: string;
   private _date: Date;
 
   constructor(title?: string, description?: string, date?: Date) {
+    this._id = nextID++;
     this._title = (title) ? title : '';
     this._description = (description) ? description : '';
     this._date = (date) ? date : new Date();
@@ -16,8 +19,9 @@ export class Task {
    * Returns the new instance.
    * @param task
    */
-  static fromSelf(task: Task) {
+  static fromSelfCopy(task: Task) {
     const copy = new Task();
+    copy._id = task._id;
     copy._title = task._title;
     copy._description = task._description;
     copy._date = task._date;
@@ -30,9 +34,18 @@ export class Task {
    * @param task
    */
   fromOther(task: Task) {
+    this._id = task._id;
     this._title = task._title;
     this._description = task._description;
     this._date = task._date;
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(value: number) {
+    this._id = value;
   }
 
   get description(): string {

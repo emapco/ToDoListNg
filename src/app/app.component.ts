@@ -18,7 +18,6 @@ export class AppComponent implements OnDestroy{
     // subscription for login
     this.subscription = _loginServ.loginAnnounced$.subscribe(
       isLoggedIn => {
-        console.log(isLoggedIn)
         this.showLogin = !isLoggedIn;
       }
     )

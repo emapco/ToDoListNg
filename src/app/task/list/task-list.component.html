@@ -18,25 +18,25 @@
   </mat-grid-list>
 </div>
 <mat-divider></mat-divider>
-<div *ngFor="let taskUI of tasks"> <!--   -->
+<div *ngFor="let task of tasks"> <!--   -->
   <mat-grid-list cols="4" rowHeight="4:1">
     <mat-grid-tile>
-      <mat-checkbox [(ngModel)]="taskUI.selected" (change)="onSelectTask(taskUI)"></mat-checkbox>
+      <mat-checkbox [checked]="isTaskSelected(task)" (change)="onSelectTask(task, $event)"></mat-checkbox>
     </mat-grid-tile>
     <mat-grid-tile>
-      {{taskUI.task.title}}
+      {{task.title}}
     </mat-grid-tile>
     <mat-grid-tile>
-      {{taskUI.task.description}}
+      {{task.description}}
     </mat-grid-tile>
     <mat-grid-tile>
-      {{taskUI.task.date | formatDateDisplay}}
+      {{task.date | formatDateDisplay}}
     </mat-grid-tile>
   </mat-grid-list>
 </div>
 <mat-divider></mat-divider>
 <app-add-task></app-add-task>
-<app-task-detail *ngIf="selectedTask" [task]="selectedTask.task" (taskSaved)="onTaskSaved($event)"
+<app-task-detail *ngIf="displayTask" [task]="displayTask" (taskSaved)="onTaskSaved($event)"
                  [action]="callToAction" [header]="callToActionHeader"></app-task-detail>
 
 

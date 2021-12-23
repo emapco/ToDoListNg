@@ -15,13 +15,14 @@ import {MatButtonModule} from "@angular/material/button";
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
-import {TaskListComponent} from "./task-list.component";
-import {TaskDetailComponent} from "./task-detail.component";
+import {TaskListComponent} from "./list/task-list.component";
+import {TaskDetailComponent} from "./detail/task-detail.component";
 import {FormatDateDisplayPipe} from "../shared/format-date-display.pipe";
 import {FormatTimeDisplayPipe} from "../shared/format-time-display.pipe";
 import {MatIconModule} from "@angular/material/icon";
 import { AddTaskComponent } from './add-task/add-task.component';
 import {MatCardModule} from "@angular/material/card";
+import { RemoveTaskComponent } from './remove-task/remove-task.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {MatCardModule} from "@angular/material/card";
     TaskDetailComponent,
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
-    AddTaskComponent
+    AddTaskComponent,
+    RemoveTaskComponent
   ],
   imports: [
     CommonModule,

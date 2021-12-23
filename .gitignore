@@ -3,6 +3,8 @@
 /karma.conf.js
 /.editorconfig
 /.browserslistrc
+/.angular
+/.vscode
 
 # compiled output
 /dist
