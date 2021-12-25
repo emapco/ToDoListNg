@@ -5,13 +5,13 @@ export class Task {
   private _description: string;
   private _date: Date;
 
-  constructor(title?: string, description?: string, date?: Date) {
-    this._id = nextID++;
+  constructor(title?: string, description?: string, date?: Date, id?: number) {
+    this._id = (id) ? id : nextID++;
     this._title = (title) ? title : '';
     this._description = (description) ? description : '';
     this._date = (date) ? date : new Date();
     let oneHour: number = (60*60*1000)
-    this._date.setTime(this.date.getTime() + oneHour)
+    this._date.setTime(this.date.getTime() + oneHour);
   }
 
   /**

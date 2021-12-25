@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {SidebarService} from "./shared/sidebar.service";
 import {LoginService} from "./shared/login.service";
 import {Subscription} from "rxjs";
+import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,14 @@ import {Subscription} from "rxjs";
 })
 export class AppComponent implements OnDestroy{
   title = 'ToDoListNg';
-  showLogin: boolean;
+  showLogin: boolean = false;
   subscription: Subscription;
-  constructor(private _sidebarServ: SidebarService, private _loginServ: LoginService) {
-    this.showLogin = !this._loginServ.isLoggedIn;  // show if not logged in
+  constructor(public sidebarServ: SidebarService,
+              public loginServ: LoginService,
+              public auth: AuthService) {
+    this.showLogin = !this.loginServ.isLoggedIn;  // show if not logged in
     // subscription for login
-    this.subscription = _loginServ.loginAnnounced$.subscribe(
+    this.subscription = loginServ.loginAnnounced$.subscribe(
       isLoggedIn => {
         this.showLogin = !isLoggedIn;
       }
@@ -25,10 +28,6 @@ export class AppComponent implements OnDestroy{
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  get sidebarServ(): SidebarService {
-    return this._sidebarServ;
   }
 
   formatContent() {

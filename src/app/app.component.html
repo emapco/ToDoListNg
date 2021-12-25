@@ -1,10 +1,12 @@
-<app-login *ngIf="showLogin"></app-login>
+<app-login-button *ngIf="showLogin"></app-login-button>
+
 <div [ngClass]="{'background': showLogin}">
   <app-header></app-header>
   <app-siderbar></app-siderbar>
   <div class="content" role="main"
-       [ngStyle]="formatContent()">
+       [ngStyle]="formatContent()"> <!-- *ngIf="(auth.isAuthenticated$ | async)"-->
     <app-task-list></app-task-list>
   </div>
   <app-footer></app-footer>
 </div>
+

@@ -1,5 +1,6 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {SidebarService} from "../../shared/sidebar.service";
+import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'app-siderbar',
@@ -7,16 +8,12 @@ import {SidebarService} from "../../shared/sidebar.service";
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements AfterViewInit {
-  constructor(private _sidebarServ: SidebarService) {}
+  constructor(public sidebarServ: SidebarService, public auth: AuthService) {}
 
   ngAfterViewInit() {
     let element = document.getElementById('content');
     if (element) {
-      this._sidebarServ.sidebarWidth = getComputedStyle(element).getPropertyValue('width');
+      this.sidebarServ.sidebarWidth = getComputedStyle(element).getPropertyValue('width');
     }
-  }
-
-  get sidebarServ(): SidebarService {
-    return this._sidebarServ;
   }
 }

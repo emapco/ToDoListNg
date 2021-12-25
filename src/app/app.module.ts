@@ -14,9 +14,12 @@ import {SidebarService} from "./shared/sidebar.service";
 import {LoginModule} from "./login/login.module";
 import {LoginService} from "./shared/login.service";
 
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment as env } from '../environments/environment';
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
     imports: [
         BrowserModule,
@@ -24,8 +27,11 @@ import {LoginService} from "./shared/login.service";
         FormsModule,
         TaskModule,
         MainUIModule,
+        LoginModule,
         BrowserAnimationsModule,
-        LoginModule
+        AuthModule.forRoot({
+          ...env.auth,
+        }),
     ],
   providers: [BackendService, TaskService, SidebarService, LoginService],
   bootstrap: [AppComponent]

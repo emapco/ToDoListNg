@@ -1,23 +1,34 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { CommonModule} from '@angular/common';
+
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
-import { RegisterComponent } from './register/register.component';
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+
 import {LoginService} from "../shared/login.service";
+import {LoginButtonComponent} from "./login-button/login-button.component";
+import {LogoutButtonComponent} from "./logout-button/logout-button.component";
+import {SignupButtonComponent} from "./signup-button/signup-button.component";
+import {AuthenticationButtonComponent} from "./authentication-button/authentication-button.component";
 
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    RegisterComponent
+    LoginButtonComponent,
+    LogoutButtonComponent,
+    SignupButtonComponent,
+    AuthenticationButtonComponent
   ],
   exports: [
-    LoginComponent
+    LoginButtonComponent,
+    LogoutButtonComponent,
+    SignupButtonComponent,
+    AuthenticationButtonComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +37,9 @@ import {LoginService} from "../shared/login.service";
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     LoginService
