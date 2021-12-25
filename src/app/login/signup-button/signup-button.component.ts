@@ -15,7 +15,7 @@ export class SignupButtonComponent implements OnInit {
 
   signupWithRedirect(): void {
     this.auth.loginWithPopup({
-      screen_hint: 'signup',
+      screen_hint: 'signup'
     });
   }
 }

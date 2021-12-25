@@ -14,7 +14,7 @@ import {LoginService} from "../shared/login.service";
 import {LoginButtonComponent} from "./login-button/login-button.component";
 import {LogoutButtonComponent} from "./logout-button/logout-button.component";
 import {SignupButtonComponent} from "./signup-button/signup-button.component";
-import {AuthenticationButtonComponent} from "./authentication-button/authentication-button.component";
+import {AuthSidebarNavComponent} from "./authentication-sidebar-nav/auth-sidebar-nav.component";
 
 
 @NgModule({
@@ -22,13 +22,13 @@ import {AuthenticationButtonComponent} from "./authentication-button/authenticat
     LoginButtonComponent,
     LogoutButtonComponent,
     SignupButtonComponent,
-    AuthenticationButtonComponent
+    AuthSidebarNavComponent
   ],
   exports: [
     LoginButtonComponent,
     LogoutButtonComponent,
     SignupButtonComponent,
-    AuthenticationButtonComponent
+    AuthSidebarNavComponent
   ],
   imports: [
     CommonModule,

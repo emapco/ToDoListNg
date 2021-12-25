@@ -4,6 +4,7 @@ import {TaskService} from "../task.service";
 import {Subscription} from "rxjs";
 import {FormatTimeDisplayPipe} from "../../shared/format-time-display.pipe";
 import {FormatDateDisplayPipe} from "../../shared/format-date-display.pipe";
+import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'app-task-list',
@@ -20,9 +21,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
   private _selectedTasks: Task[] = [];
   private _displayTask: Task | undefined;
 
-  constructor(private service: TaskService) {
+  constructor(public taskService: TaskService) {
     // subscription for changes to TaskService task array
-    this._subscription = service.changeAnnounced$.subscribe(
+    this._subscription = taskService.changeAnnounced$.subscribe(
       _ => {
         this.updateTasks();
       }
@@ -101,7 +102,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this._selectedAll = false;
     this._selectedTasks.splice(0, this._selectedTasks.length);
     this._tasks.splice(0, this._tasks.length);
-    this.service.tasks.forEach((task: Task) => {
+    this.taskService.tasks.forEach((task: Task) => {
       this._tasks.push(task);
     });
   }

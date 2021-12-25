@@ -12,17 +12,17 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import {TaskListComponent} from "./list/task-list.component";
 import {TaskDetailComponent} from "./detail/task-detail.component";
+import { AddTaskComponent } from './add-task/add-task.component';
+import { RemoveTaskComponent } from './remove-task/remove-task.component';
 import {FormatDateDisplayPipe} from "../shared/format-date-display.pipe";
 import {FormatTimeDisplayPipe} from "../shared/format-time-display.pipe";
-import {MatIconModule} from "@angular/material/icon";
-import { AddTaskComponent } from './add-task/add-task.component';
-import {MatCardModule} from "@angular/material/card";
-import { RemoveTaskComponent } from './remove-task/remove-task.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,9 @@ import { RemoveTaskComponent } from './remove-task/remove-task.component';
   ],
   exports: [
     TaskListComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    AddTaskComponent,
+    RemoveTaskComponent
   ],
   providers: [
     FormatTimeDisplayPipe

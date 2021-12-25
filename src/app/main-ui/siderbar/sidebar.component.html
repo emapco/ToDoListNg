@@ -1,10 +1,6 @@
-<div *ngIf="sidebarServ.enableSidebar" id="content" role="main">
-  <mat-nav-list class="sidebar">
-    <section> <!-- *ngIf="(auth.isAuthenticated$ | async)"-->
-      <mat-list-item>Tasks Due Today</mat-list-item>
-      <mat-list-item>Tasks Due 7 Days</mat-list-item>
-      <mat-list-item>All Tasks</mat-list-item>
-    </section>
-    <app-authentication-button></app-authentication-button>
+<div *ngIf="sidebarServ.enableSidebar" id="container" role="main">
+  <mat-nav-list>
+    <app-main-sidebar *ngIf="(auth.isAuthenticated$ | async)"></app-main-sidebar><!-- -->
+    <app-auth-sidebar-nav></app-auth-sidebar-nav>
   </mat-nav-list>
 </div>

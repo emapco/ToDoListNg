@@ -14,8 +14,6 @@ export class LoginButtonComponent implements OnInit {
   }
 
   loginWithRedirect(): void {
-    this.auth.loginWithPopup({
-      screen_hint: 'signup',
-    });
+    this.auth.loginWithPopup();
   }
 }

@@ -5,9 +5,10 @@ import {CommonModule} from "@angular/common";
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-
 import {TaskModule} from "./task/task.module";
 import {MainUIModule} from "./main-ui/main-u-i.module";
+
+import {AppRoutingModule} from "./app-routing.module";
 import {BackendService} from "./backend.service";
 import {TaskService} from "./task/task.service";
 import {SidebarService} from "./shared/sidebar.service";
@@ -16,22 +17,27 @@ import {LoginService} from "./shared/login.service";
 
 import { AuthModule } from '@auth0/auth0-angular';
 import { environment as env } from '../environments/environment';
+import {PagesModule} from "./pages/pages.module";
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
     imports: [
-        BrowserModule,
-        CommonModule,
-        FormsModule,
-        TaskModule,
-        MainUIModule,
-        LoginModule,
-        BrowserAnimationsModule,
-        AuthModule.forRoot({
-          ...env.auth,
-        }),
+      BrowserModule,
+      CommonModule,
+      FormsModule,
+      BrowserAnimationsModule,
+      TaskModule,
+      MainUIModule,
+      LoginModule,
+      PagesModule,
+      AppRoutingModule,
+      AuthModule.forRoot({
+        ...env.auth,
+      }),
     ],
   providers: [BackendService, TaskService, SidebarService, LoginService],
   bootstrap: [AppComponent]

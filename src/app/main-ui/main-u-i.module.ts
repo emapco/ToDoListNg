@@ -10,12 +10,17 @@ import {LoginModule} from "../login/login.module";
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './siderbar/sidebar.component';
+import { MainSidebarComponent } from './siderbar/main-sidebar/main-sidebar.component';
+import {AppRoutingModule} from "../app-routing.module";
+
+
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    MainSidebarComponent
   ],
   imports: [
     CommonModule,
@@ -23,12 +28,14 @@ import { SidebarComponent } from './siderbar/sidebar.component';
     MatSidenavModule,
     MatIconModule,
     LoginModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AppRoutingModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    MainSidebarComponent
   ],
 })
 export class MainUIModule { }
