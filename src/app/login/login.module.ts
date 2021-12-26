@@ -10,11 +10,11 @@ import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 
-import {LoginService} from "../shared/login.service";
 import {LoginButtonComponent} from "./login-button/login-button.component";
 import {LogoutButtonComponent} from "./logout-button/logout-button.component";
 import {SignupButtonComponent} from "./signup-button/signup-button.component";
 import {AuthSidebarNavComponent} from "./authentication-sidebar-nav/auth-sidebar-nav.component";
+
 
 
 @NgModule({
@@ -41,8 +41,6 @@ import {AuthSidebarNavComponent} from "./authentication-sidebar-nav/auth-sidebar
     MatButtonModule,
     MatIconModule
   ],
-  providers: [
-    LoginService
-  ]
+  providers: [],
 })
 export class LoginModule { }

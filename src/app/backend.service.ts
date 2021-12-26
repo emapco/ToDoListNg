@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Task} from "./task/task";
+import {Task} from "./pages/task/task";
 
 const TASKS = [new Task('Title1', 'Description1'),
   new Task('Title2', 'Description2'),

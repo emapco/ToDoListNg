@@ -21,8 +21,8 @@ import {TaskListComponent} from "./list/task-list.component";
 import {TaskDetailComponent} from "./detail/task-detail.component";
 import { AddTaskComponent } from './add-task/add-task.component';
 import { RemoveTaskComponent } from './remove-task/remove-task.component';
-import {FormatDateDisplayPipe} from "../shared/format-date-display.pipe";
-import {FormatTimeDisplayPipe} from "../shared/format-time-display.pipe";
+import {FormatDateDisplayPipe} from "../../shared/format-date-display.pipe";
+import {FormatTimeDisplayPipe} from "../../shared/format-time-display.pipe";
 
 @NgModule({
   declarations: [

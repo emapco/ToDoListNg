@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../../shared/login.service";
 import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
@@ -8,7 +7,7 @@ import {AuthService} from "@auth0/auth0-angular";
   styleUrls: ['../login.css']
 })
 export class LoginButtonComponent implements OnInit {
-  constructor(private _loginServ: LoginService, public auth: AuthService) { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
   }

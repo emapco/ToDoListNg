@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Task} from "../task";
 import {TaskService} from "../task.service";
 import {Subscription} from "rxjs";
-import {FormatTimeDisplayPipe} from "../../shared/format-time-display.pipe";
-import {FormatDateDisplayPipe} from "../../shared/format-date-display.pipe";
+import {FormatTimeDisplayPipe} from "../../../shared/format-time-display.pipe";
+import {FormatDateDisplayPipe} from "../../../shared/format-date-display.pipe";
 import {AuthService} from "@auth0/auth0-angular";
 
 @Component({

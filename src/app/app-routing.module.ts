@@ -1,24 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Routes, RouterModule} from "@angular/router";
-import {TaskListComponent} from "./task/list/task-list.component";
+import {TaskListComponent} from "./pages/task/list/task-list.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
 import {WelcomePageComponent} from "./pages/welcome-page/welcome-page.component";
 import {AuthGuard, AuthService} from "@auth0/auth0-angular";
+import {ApiComponent} from "./pages/api/api.component";
 
 const routes: Routes = [  // const for defining routes
-  { path: '',
+  {
+    path: '',
     component: WelcomePageComponent,
     pathMatch: 'full',
   },
-  { path: 'tasks',
+  {
+    path: 'tasks',
     component: TaskListComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
-  { path: 'profile',
+  {
+    path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'api',
+    component: ApiComponent,
+    canActivate: [AuthGuard],
   },
   { path: '**', component: PageNotFoundComponent}
 ];

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Task} from "../task";
-import {FormatTimeDisplayPipe} from "../../shared/format-time-display.pipe";
+import {FormatTimeDisplayPipe} from "../../../shared/format-time-display.pipe";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 @Component({
