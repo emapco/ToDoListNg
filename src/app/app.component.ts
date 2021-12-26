@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SidebarService} from "./shared/sidebar.service";
-import {AuthService} from "@auth0/auth0-angular";
+import {SidebarService} from "./core/sidebar.service";
 
 @Component({
   selector: 'app-root',
@@ -10,8 +9,7 @@ import {AuthService} from "@auth0/auth0-angular";
 })
 export class AppComponent implements OnInit {
   title = 'ToDoListNg';
-  constructor(public sidebarServ: SidebarService,
-              public auth: AuthService) {
+  constructor(public sidebarServ: SidebarService) {
   }
 
   ngOnInit() {

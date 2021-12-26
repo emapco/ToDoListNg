@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthSidebarNavComponent } from './auth-sidebar-nav.component';
+import { LogoutComponent } from './logout.component';
 
-describe('AuthenticationButtonComponent', () => {
-  let component: AuthSidebarNavComponent;
-  let fixture: ComponentFixture<AuthSidebarNavComponent>;
+describe('LogoutButtonComponent', () => {
+  let component: LogoutComponent;
+  let fixture: ComponentFixture<LogoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthSidebarNavComponent ]
+      declarations: [ LogoutComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthSidebarNavComponent);
+    fixture = TestBed.createComponent(LogoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

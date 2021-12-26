@@ -1,6 +1,6 @@
 <div *ngIf="sidebarServ.enableSidebar" id="container" role="main">
   <mat-nav-list>
-    <app-main-sidebar *ngIf="(auth.isAuthenticated$ | async)"></app-main-sidebar><!-- -->
-    <app-auth-sidebar-nav></app-auth-sidebar-nav>
+    <app-main-sidebar></app-main-sidebar>
+    <app-auth-sidebar></app-auth-sidebar>
   </mat-nav-list>
 </div>

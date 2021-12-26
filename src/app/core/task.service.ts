@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {BackendService} from "../../backend.service";
-import {Task} from "./task";
+import {BackendService} from "./backend.service";
+import {Task} from "../pages/task/task";
 import {Subject} from "rxjs";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TaskService {
   private _tasks: Task[] = [];
   // observable Task sources

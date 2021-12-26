@@ -5,8 +5,9 @@ import {TaskListComponent} from "./pages/task/list/task-list.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
 import {WelcomePageComponent} from "./pages/welcome-page/welcome-page.component";
-import {AuthGuard, AuthService} from "@auth0/auth0-angular";
-import {ApiComponent} from "./pages/api/api.component";
+import {LoginComponent} from "./pages/login/login/login.component";
+import {SignupComponent} from "./pages/login/signup/signup.component";
+import {LogoutComponent} from "./pages/login/logout/logout.component";
 
 const routes: Routes = [  // const for defining routes
   {
@@ -17,19 +18,32 @@ const routes: Routes = [  // const for defining routes
   {
     path: 'tasks',
     component: TaskListComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   },
   {
-    path: 'api',
-    component: ApiComponent,
-    canActivate: [AuthGuard],
+    path: 'login',
+    component: LoginComponent,
+    //canActivate: [AuthGuard],
   },
-  { path: '**', component: PageNotFoundComponent}
+  {
+    path: 'register',
+    component: SignupComponent,
+    //canActivate: [AuthGuard],
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+    //canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({

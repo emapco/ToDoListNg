@@ -1,7 +1,7 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 <div class="content-view" [ngStyle]="formatContent() ">
-  <section class="content" role="main"><!-- *ngIf="(auth.isAuthenticated$ | async)" -->
+  <section class="content" role="main">
     <router-outlet></router-outlet>
   </section>
 </div>

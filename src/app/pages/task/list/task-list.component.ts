@@ -1,16 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Task} from "../task";
-import {TaskService} from "../task.service";
+import {TaskService} from "../../../core/task.service";
 import {Subscription} from "rxjs";
-import {FormatTimeDisplayPipe} from "../../../shared/format-time-display.pipe";
-import {FormatDateDisplayPipe} from "../../../shared/format-date-display.pipe";
-import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
-  providers: [TaskService]
 })
 export class TaskListComponent implements OnInit, OnDestroy {
   private _selectedAll: boolean = false;
