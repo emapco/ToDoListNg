@@ -1,5 +1,6 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {SidebarService} from "../../core/sidebar.service";
+import {AuthorizationService} from "../../authorization/authorization.service";
 
 @Component({
   selector: 'app-sidebar',

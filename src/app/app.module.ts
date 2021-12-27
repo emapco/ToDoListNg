@@ -5,6 +5,7 @@ import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
 import {MainUIModule} from "./main-ui/main-u-i.module";
 import {PagesModule} from "./pages/pages.module";
+import {AuthorizationModule} from "./authorization/authorization.module";
 
 
 
@@ -17,6 +18,7 @@ import {PagesModule} from "./pages/pages.module";
     PagesModule,
     SharedModule,
     CoreModule,
+    AuthorizationModule,
   ],
   bootstrap: [AppComponent]
 })

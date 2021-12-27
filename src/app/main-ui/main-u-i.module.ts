@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import {SharedModule} from "../shared/shared.module";
-import {LoginModule} from "../pages/login/login.module";
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './siderbar/sidebar.component';
@@ -20,7 +19,6 @@ import {AuthSidebarComponent} from "./siderbar/auth-sidebar/auth-sidebar.compone
   ],
   imports: [
     SharedModule,
-    LoginModule,
   ],
   exports: [
     HeaderComponent,

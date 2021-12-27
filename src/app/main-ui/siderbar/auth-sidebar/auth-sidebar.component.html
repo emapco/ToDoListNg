@@ -1,6 +1,9 @@
-<mat-list-item routerLink="/login" routerLinkActive="active">Login
+<mat-list-item routerLink="/login" routerLinkActive="active"
+               (click)="authService.login()"
+               *ngIf="!authService.isAuthenticated">
+  Login /<br>Register
   <mat-icon class="icon-list-item">login</mat-icon></mat-list-item>
-<mat-list-item routerLink="/register" routerLinkActive="active">Register
-  <mat-icon class="icon-list-item">create</mat-icon></mat-list-item>
-<mat-list-item routerLink="/logout" routerLinkActive="active">Log out
+<mat-list-item (click)="authService.logout()"
+               *ngIf="authService.isAuthenticated">
+  Log out
   <mat-icon class="icon-list-item">logout</mat-icon></mat-list-item>

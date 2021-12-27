@@ -14,13 +14,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 4em 1.2em 2em;
+  padding: 4em 1.5em 2em;
   justify-content: flex-start;
   align-items: center;
   min-height: calc(100vh - 9em);
 }
 
 .content {
-  padding-top: 2em;
+  padding-top: 1em;
   width: 100%;
 }
