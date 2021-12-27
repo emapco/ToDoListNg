@@ -1,0 +1,27 @@
+div {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2vh;
+}
+
+mat-card {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  max-width: 60vw;
+}
+
+h1 {
+  align-self: center;
+}
+
+ul {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+li {
+  padding: .3em 0;
+}
