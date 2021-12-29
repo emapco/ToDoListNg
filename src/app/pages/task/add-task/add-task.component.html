@@ -1,9 +1,9 @@
 <mat-grid-list cols="4" rowHeight="4:1">
   <mat-grid-tile>
-    <button mat-raised-button (click)="onClickAddNew()"><mat-icon>add</mat-icon></button>
+    <button mat-raised-button (click)="onClickAddButton()"><mat-icon>add</mat-icon></button>
   </mat-grid-tile>
 </mat-grid-list>
-<div *ngIf="enabledAddNewTask">
+<div *ngIf="addNewTaskEnabled">
 <app-task-detail [task]="newTask" (taskSaved)="onTaskSave($event)"
                  [action]="callToAction" [header]="callToActionHeader"></app-task-detail>
 </div>

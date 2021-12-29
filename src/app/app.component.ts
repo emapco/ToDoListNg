@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SidebarService} from "./core/sidebar.service";
 import {AuthorizationService} from "./authorization/authorization.service";
+import {BackendService} from "./core/backend.service";
 
 @Component({
   selector: 'app-root',

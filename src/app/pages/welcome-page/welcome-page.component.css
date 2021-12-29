@@ -13,6 +13,10 @@ mat-card {
   max-width: 60vw;
 }
 
+p, li {
+  font-size: 16px;
+}
+
 h1 {
   align-self: center;
 }
@@ -24,4 +28,11 @@ ul {
 
 li {
   padding: .3em 0;
+}
+img {
+  width: 30em;
+}
+
+figure, figcaption {
+  align-self: center;
 }

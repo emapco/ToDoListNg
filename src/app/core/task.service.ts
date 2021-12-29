@@ -1,37 +1,35 @@
 import { Injectable } from '@angular/core';
-import {BackendService} from "./backend.service";
-import {Task} from "../pages/task/task";
 import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private _tasks: Task[] = [];
-  // observable Task sources
-  private _changeAnnouncedSource = new Subject<Task>();
-  private _changeConfirmedSource = new Subject<Task>();
-  // observable Task stream
-  changeAnnounced$ = this._changeAnnouncedSource.asObservable();
-  changeConfirmed = this._changeConfirmedSource.asObservable();
+  private _isTaskSelect: boolean = false;
+  private _isNewTaskSelect: boolean = false;
 
-  constructor(private backend: BackendService) {
-    this._tasks = this.backend.getAll();
+  constructor() { }
+
+  toggleIsTaskSelect() {
+    this._isTaskSelect = !this._isTaskSelect;
   }
 
-  announceChange(task: Task) {
-    this._changeAnnouncedSource.next(task);
+  toggleIsNewTaskSelect() {
+    this._isNewTaskSelect = !this._isNewTaskSelect;
   }
 
-  confirmChange(task: Task) {
-    this._changeConfirmedSource.next(task);
+  get isTaskSelect(): boolean {
+    return this._isTaskSelect;
+  }
+  set isTaskSelect(value: boolean) {
+    this._isTaskSelect = value;
   }
 
-  get tasks() {
-    return this._tasks;
+  get isNewTaskSelect(): boolean {
+    return this._isNewTaskSelect;
   }
 
-  set tasks(value: Task[]) {
-    this._tasks = value;
+  set isNewTaskSelect(value: boolean) {
+    this._isNewTaskSelect = value;
   }
 }

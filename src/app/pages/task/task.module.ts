@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { RemoveTaskComponent } from './remove-task/remove-task.component';
+import { DeleteTaskComponent } from './delete-task/delete-task.component';
 import {SharedModule} from "../../shared/shared.module";
 import {TaskListComponent} from "./list/task-list.component";
 import {TaskDetailComponent} from "./detail/task-detail.component";
@@ -13,7 +13,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
     TaskListComponent,
     TaskDetailComponent,
     AddTaskComponent,
-    RemoveTaskComponent
+    DeleteTaskComponent
   ],
   imports: [
     SharedModule,
@@ -22,7 +22,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
     TaskListComponent,
     TaskDetailComponent,
     AddTaskComponent,
-    RemoveTaskComponent,
+    DeleteTaskComponent,
   ],
   providers: [],
 })

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from "../task";
+import {Task} from "../../../task";
 import {FormatTimeDisplayPipe} from "../../../shared/format-time-display.pipe";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
@@ -24,18 +24,6 @@ export class TaskDetailComponent implements OnInit {
     this._editTask = Task.fromSelfCopy(this.task);
   }
 
-  toggleEditTitle() {
-    this._enableEditTitle = !this._enableEditTitle;
-  }
-
-  toggleEditDescription() {
-    this._enableEditDescription = !this._enableEditDescription;
-  }
-
-  toggleEditDate() {
-    this._enableEditDate = !this._enableEditDate;
-  }
-
   onSave() {
     this.task.fromOther(this._editTask);
     this.taskSaved.emit(this._editTask);
@@ -51,8 +39,20 @@ export class TaskDetailComponent implements OnInit {
   }
 
   updateTime(value: any) {
-    let time_str = this._editTask.date.toDateString();
-    this._editTask.date = new Date(time_str + " " + value);
+    let time_str = new Date(this._editTask.date).toDateString() + value;
+    this._editTask.date = new Date(time_str).getTime();
+  }
+
+  toggleEditTitle() {
+    this._enableEditTitle = !this._enableEditTitle;
+  }
+
+  toggleEditDescription() {
+    this._enableEditDescription = !this._enableEditDescription;
+  }
+
+  toggleEditDate() {
+    this._enableEditDate = !this._enableEditDate;
   }
 
   get editTask(): Task {

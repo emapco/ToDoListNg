@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Task} from "../task";
-import {TaskService} from "../../../core/task.service";
+import {Task} from "../../../task";
 import {Subscription} from "rxjs";
+import {BackendService} from "../../../core/backend.service";
+import {TaskService} from "../../../core/task.service";
 
 @Component({
   selector: 'app-task-list',
@@ -9,39 +10,64 @@ import {Subscription} from "rxjs";
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  private _selectedAll: boolean = false;
+  private _isSelectedAll: boolean = false;
   private _callToActionHeader: string = 'Task Detail';
   private _callToAction: string = 'Save Changes';
-  private _subscription: Subscription;
+  private _taskSubscription: Subscription;
   private _tasks: Task[] = [];
   private _selectedTasks: Task[] = [];
   private _displayTask: Task | undefined;
 
-  constructor(public taskService: TaskService) {
-    // subscription for changes to TaskService task array
-    this._subscription = taskService.changeAnnounced$.subscribe(
-      _ => {
-        this.updateTasks();
-      }
-    )
+  constructor(private backend: BackendService,
+              public taskService: TaskService) {
+    // subscription for changes to backend task array
+    this._taskSubscription = this.backend.changeAnnounced.subscribe(
+      () => {
+        this.updateTasks().then();
+      });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this._selectedTasks = [];
-    this.updateTasks();
+    await this.updateTasks();
   }
 
-  ngOnDestroy() {
-    this._subscription.unsubscribe();
+  ngOnDestroy(): void {
+    this._taskSubscription.unsubscribe();
   }
 
   /**
    * Event handler for event emitted by child TaskDetailComponent.
+   * Clears the displayed task and then updates the list of tasks
    * @param task
    */
-  onTaskSaved(task: any) {
+  async onTaskSaved(task: Task) {
     this._displayTask = undefined;
-    this.updateTasks();
+    this.backend.editedTask(task).then(() => this.updateTasks());
+  }
+
+  /**
+   * Event handler for event emitted by child DeleteTaskComponent.
+   * Invokes backend service to delete the tasks
+   */
+  async onTaskDeleted() {
+    this._selectedTasks.forEach((task: Task) => {
+      this._displayTask = undefined;
+      this.backend.deleteTask(task);
+    });
+  }
+
+  /**
+   * Updates the tasks array that is displayed in the template.
+   * Also clears the selectAll and selectedTasks attributes
+   */
+  async updateTasks() {
+    this._isSelectedAll = false;
+    this._selectedTasks.splice(0, this._selectedTasks.length);
+    this._tasks.splice(0, this._tasks.length);
+    this.backend.tasks.forEach((task: Task) => {
+      this._tasks.push(Task.fromSelfCopy(task));
+    });
   }
 
   /**
@@ -49,7 +75,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
    */
   onSelectAll() {
     this._selectedTasks.splice(0, this._selectedTasks.length);
-    if (this._selectedAll) {
+    if (this._isSelectedAll) {
       this._tasks.forEach((task) => {
         this._selectedTasks.push(task);
       })
@@ -64,43 +90,36 @@ export class TaskListComponent implements OnInit, OnDestroy {
    * @param event
    */
   onSelectTask(task: Task, event: any) {
-    let isTaskChecked = event.checked;
     // add or remove task if checkbox is checked
+    let isTaskChecked = event.checked;
     if (isTaskChecked) {
       this._selectedTasks.push(task);
     } else {
       this._selectedTasks.splice(this.findSelectedTask(task), 1)
     }
 
-    let areOtherTasksSelected: boolean = this._selectedTasks.length > 1;
     // display task detail logic
+    let areOtherTasksSelected: boolean = this._selectedTasks.length > 1;
     if (areOtherTasksSelected) {
-      this._displayTask = undefined; // only display detail if only one is selected
-    } else if (isTaskChecked && !this._selectedAll) {
+      // only display detail if only one is selected
+      this._displayTask = undefined;
+    } else if (isTaskChecked && !this._isSelectedAll && !this.taskService.isNewTaskSelect) {
+      // display if task was just checked, isSelectAll and isNewTaskSelect are cleared
       this._displayTask = task;
-    } else {
+    } else if (!this.taskService.isNewTaskSelect) {
+      // 0-1 tasks selected case; only display if isNewTaskSelect is not set
       this._displayTask = this._selectedTasks[0];
     }
 
     // logic for task select and select all check box
-    if (!isTaskChecked && this._selectedAll) {
-      this.selectedAll = false; // clear selectedAll since user unchecked an option
+    if (!isTaskChecked && this._isSelectedAll) {
+      // clear selectedAll since user unchecked an option
+      this.isSelectedAll = false;
+      // user checked all tasks thus set selectAll.
     }else if (this._selectedTasks.length === this._tasks.length) {
-      this.selectedAll = true; // user checked all tasks thus set selectAll.
+      this.isSelectedAll = true;
     }
-  }
-
-  /**
-   * Updates the tasks array that is displayed in the template.
-   * Also clears the selectAll and selectedTasks attributes
-   */
-  updateTasks() {
-    this._selectedAll = false;
-    this._selectedTasks.splice(0, this._selectedTasks.length);
-    this._tasks.splice(0, this._tasks.length);
-    this.taskService.tasks.forEach((task: Task) => {
-      this._tasks.push(task);
-    });
+    this.taskService.isTaskSelect = Boolean(this._displayTask);
   }
 
   /**
@@ -119,12 +138,12 @@ export class TaskListComponent implements OnInit, OnDestroy {
     return this._selectedTasks.findIndex(t => t.id == task.id);
   }
 
-  get selectedAll(): boolean {
-    return this._selectedAll;
+  get isSelectedAll(): boolean {
+    return this._isSelectedAll;
   }
 
-  set selectedAll(value: boolean) {
-    this._selectedAll = value;
+  set isSelectedAll(value: boolean) {
+    this._isSelectedAll = value;
   }
 
   get tasks(): Task[] {

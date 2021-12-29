@@ -17,10 +17,9 @@ export class AuthorizationService {
   private _isAuthenticated: boolean = false;
   private _access_token: string = '';
   private _id_token: string = '';
-  private _email: string = '';
 
-  constructor(@Inject(DOCUMENT) public document: Document,
-              public cookie: CookieService) { }
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private cookie: CookieService) { }
 
   /**
    * Gets tokens if recently logged in and stores them in cookies
@@ -39,21 +38,21 @@ export class AuthorizationService {
         this._access_token = AuthorizationService._getTokenFromUrl(link, '&access_token=');
         this._id_token = AuthorizationService._getTokenFromUrl(link, '#id_token=');
       }
-      this.cookie.set('accessTokenCookie', this._access_token);
-      this.cookie.set('idTokenCookie', this._id_token);
+      let options = {expires: 1, secure: true, sameSite: 'Strict'} as const;
+      this.cookie.set('accessTokenCookie', this._access_token, options);
+      this.cookie.set('idTokenCookie', this._id_token, options);
     }
 
     if (this._access_token && this._id_token) {
-      this._isAuthenticated = await this._verifyTokens();
+      this._isAuthenticated = await this.verifyTokens();
     }
   }
 
   /**
-   * Verifies tokens are still valid and
-   * retrieves user's email using tokens.
+   * Verifies tokens are still valid.
    * If it fails then the user is logged out.
    */
-  private async _verifyTokens(): Promise<boolean> {
+  async verifyTokens(): Promise<boolean> {
     let status: boolean = false;
     try {
       let accessDecodedToken = this.decodeToken(this._access_token);
@@ -62,10 +61,8 @@ export class AuthorizationService {
       if (accessDecodedToken.exp < time || idDecodedToken.exp < time) {
         throw new Error("Token not valid!");
       }
-      this._email = idDecodedToken.email;
       status = true;
-    } catch (e){
-      console.log(e);
+    } catch {
       this.logout();
     }
     return status;
@@ -118,20 +115,19 @@ export class AuthorizationService {
     this.document.location.href = logout_url;
   }
 
+  /**
+   * Gets username from decoded access token
+   */
+  get username(): string {
+    return this.decodeToken(this._access_token).username;
+  }
+
   get isAuthenticated(): boolean {
     return this._isAuthenticated;
   }
 
   set isAuthenticated(value: boolean) {
     this._isAuthenticated = value;
-  }
-
-  get email(): string {
-    return this._email;
-  }
-
-  set email(value: string) {
-    this._email = value;
   }
 
   get access_token(): string {

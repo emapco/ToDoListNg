@@ -5,8 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FormatTimeDisplayPipe implements PipeTransform {
 
-  transform(date: Date): string {
-    return date.getHours() + ':' + date.getMinutes();
+  transform(date: number | string): string {
+    let displayDate = new Date(date);
+    return displayDate.getHours() + ':' + displayDate.getMinutes();
   }
 
 }
