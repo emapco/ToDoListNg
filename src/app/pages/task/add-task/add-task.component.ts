@@ -9,25 +9,21 @@ import {TaskService} from "../../../core/task.service";
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
-  private _addNewTaskEnabled: boolean = false;
   private _newTask: Task = new Task();
   private _callToAction: string = 'Add Task';
   private _callToActionHeader: string = 'New Task';
 
   constructor(private backend: BackendService,
-              public taskService: TaskService) { }
-
-  onClickAddButton() {
-    // if selected task is not displayed then
-    if (!this.taskService.isTaskSelect) {
-      this._newTask = new Task();
-      this.toggleEnabledAddNewTask();
-      this.taskService.toggleIsNewTaskSelect();
-    }
+              private taskService: TaskService) {
   }
 
-  toggleEnabledAddNewTask() {
-    this._addNewTaskEnabled = !this._addNewTaskEnabled;
+  /**
+   * Opens child TaskDetail and announces that
+   * edit task component needs to be closed
+   */
+  onClickAddButton() {
+    this._newTask = new Task();
+    this.taskService.announceCloseEditTask();
   }
 
   /**
@@ -38,14 +34,16 @@ export class AddTaskComponent {
    */
   async onTaskSave(task: Task) {
     if (task.title && task.description) {
-      this.backend.newTask(task);
+      await this.backend.newTask(task);
     }
     this.taskService.toggleIsNewTaskSelect();
-    this.toggleEnabledAddNewTask();
   }
 
+  /**
+   * Display new task if service property is set.
+   */
   get addNewTaskEnabled(): boolean {
-    return this._addNewTaskEnabled;
+    return this.taskService.isNewTaskSelected;
   }
 
   get newTask(): Task {

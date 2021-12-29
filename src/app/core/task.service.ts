@@ -5,31 +5,48 @@ import {Subject} from "rxjs";
   providedIn: 'root'
 })
 export class TaskService {
-  private _isTaskSelect: boolean = false;
-  private _isNewTaskSelect: boolean = false;
+  private _isEditTaskSelected: boolean = false;
+  private _isNewTaskSelected: boolean = false;
 
   constructor() { }
 
+  // observable sources
+  private _closeEditTaskAnnouncedSource = new Subject();
+  // observable stream
+  closeEditTaskAnnounced = this._closeEditTaskAnnouncedSource.asObservable();
+
+
+  announceCloseEditTask(): void {
+    this.toggleIsNewTaskSelect();
+    this._isEditTaskSelected = false;
+    this._closeEditTaskAnnouncedSource.next(undefined);
+  }
+
+  announceCloseNewTask(): void {
+    this._isNewTaskSelected = false;
+    this.toggleIsTaskSelect();
+  }
+
   toggleIsTaskSelect() {
-    this._isTaskSelect = !this._isTaskSelect;
+    this._isEditTaskSelected = !this._isEditTaskSelected;
   }
 
   toggleIsNewTaskSelect() {
-    this._isNewTaskSelect = !this._isNewTaskSelect;
+    this._isNewTaskSelected = !this._isNewTaskSelected;
   }
 
-  get isTaskSelect(): boolean {
-    return this._isTaskSelect;
+  get isEditTaskSelected(): boolean {
+    return this._isEditTaskSelected;
   }
-  set isTaskSelect(value: boolean) {
-    this._isTaskSelect = value;
-  }
-
-  get isNewTaskSelect(): boolean {
-    return this._isNewTaskSelect;
+  set isEditTaskSelected(value: boolean) {
+    this._isEditTaskSelected = value;
   }
 
-  set isNewTaskSelect(value: boolean) {
-    this._isNewTaskSelect = value;
+  get isNewTaskSelected(): boolean {
+    return this._isNewTaskSelected;
+  }
+
+  set isNewTaskSelected(value: boolean) {
+    this._isNewTaskSelected = value;
   }
 }

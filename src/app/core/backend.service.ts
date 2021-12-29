@@ -14,12 +14,12 @@ export class BackendService {
               private auth: AuthorizationService) {
     this.api.get().subscribe(
       (response: any) => {
-        let max: number = 0;
+        let maxID: number = 0;
         response.Items.forEach((task: Task) => {
           this._tasks.push(Task.fromSelfCopy(task));
-          if (task.id > max) max = task.id;
+          if (task.id > maxID) maxID = task.id;
         });
-        Task.nextID = max; // update id for new task instances
+        Task.nextID = maxID; // update id for new task instances
         this.announceChange(undefined); // announce a change to task array
       });
   }
