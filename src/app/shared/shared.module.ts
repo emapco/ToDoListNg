@@ -21,7 +21,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
-import {AppRoutingModule} from "../app-routing.module";
+import {AppRoutingModule} from "./app-routing.module";
 import {FormatDateDisplayPipe} from "./format-date-display.pipe";
 import {FormatTimeDisplayPipe} from "./format-time-display.pipe";
 
