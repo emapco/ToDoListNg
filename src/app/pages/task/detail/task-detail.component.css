@@ -1,15 +1,8 @@
-h2, span, .main {
-}
-
 .main {
   margin-left: 2em;
-  width: 50%;
+  width: 40%;
 }
 
 .timepicker {
-
-}
-
-ngx-timepicker-field {
-  width: 50%;
+  width: 0 !important;
 }

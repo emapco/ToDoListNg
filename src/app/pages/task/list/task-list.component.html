@@ -1,7 +1,7 @@
 <app-remove-task (taskDeleted)="onTaskDeleted()"></app-remove-task>
-<mat-divider></mat-divider>
+
 <section>
-  <mat-grid-list cols="4" rowHeight="4:1">
+  <mat-grid-list cols="4" rowHeight="6:1">
     <mat-grid-tile-header>
       <mat-grid-tile>
         <mat-checkbox [(ngModel)]="isSelectedAll" (change)="onSelectAll()"></mat-checkbox>
@@ -21,23 +21,23 @@
 <mat-divider>
 </mat-divider>
 <section *ngFor="let task of tasks">
-  <mat-grid-list cols="4" rowHeight="4:1">
+  <mat-grid-list cols="4" rowHeight="5:1">
     <mat-grid-tile>
       <mat-checkbox [checked]="isTaskSelected(task)" (change)="onSelectTask(task, $event)"></mat-checkbox>
     </mat-grid-tile>
     <mat-grid-tile>
-      {{task.title}}
+      {{task.title | formatTextDisplay}}
     </mat-grid-tile>
     <mat-grid-tile>
-      {{task.description}}
+      {{task.description | formatTextDisplay}}
     </mat-grid-tile>
     <mat-grid-tile>
       {{task.date | formatDateDisplay}}
     </mat-grid-tile>
   </mat-grid-list>
+  <mat-divider>
+  </mat-divider>
 </section>
-<mat-divider>
-</mat-divider>
 <app-add-task></app-add-task>
 <app-task-detail *ngIf="displayTask" [task]="displayTask" (taskSaved)="onTaskSaved($event)"
                  [action]="callToAction" [header]="callToActionHeader"></app-task-detail>

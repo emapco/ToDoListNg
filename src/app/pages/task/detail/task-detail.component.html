@@ -1,18 +1,34 @@
-<h2>{{header}}</h2>
 <mat-card class="main">
+  <mat-card-title>{{header}}</mat-card-title>
+  <br>
   <section>
     <h4>Title:
       <mat-icon (click)="toggleEditTitle()">border_color</mat-icon>
     </h4>
-    <p *ngIf="!enableEditTitle">{{editTask.title}}</p>
-    <p *ngIf="enableEditTitle"><input type="text" [(ngModel)]="editTask.title"></p>
+    <mat-card-content *ngIf="!enableEditTitle">
+      {{editTask.title}}
+    </mat-card-content>
+    <mat-form-field appearance="fill" *ngIf="enableEditTitle">
+      <textarea matInput [(ngModel)]="editTask.title"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="10"></textarea>
+    </mat-form-field>
   </section>
   <section>
     <h4>Description:
       <mat-icon (click)="toggleEditDescription()">border_color</mat-icon>
     </h4>
-    <p *ngIf="!enableEditDescription">{{editTask.description}}</p>
-    <p *ngIf="enableEditDescription"><input matInput type="text" [(ngModel)]="editTask.description"></p>
+    <mat-card-content *ngIf="!enableEditDescription">
+      {{editTask.description}}
+    </mat-card-content>
+    <mat-form-field appearance="fill" *ngIf="enableEditDescription">
+      <textarea matInput [(ngModel)]="editTask.description"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="10"></textarea>
+    </mat-form-field>
+
   </section>
   <section>
     <h4>Date:
@@ -21,7 +37,6 @@
     <p *ngIf="!enableEditDate">{{editTask.date | formatDateDisplay}}</p>
     <div *ngIf="enableEditDate">
       <mat-form-field>
-        <mat-label>Date:</mat-label>
         <input matInput [matDatepicker]="picker" (dateChange)="updateDate($event)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker [startAt]="editTask.date"></mat-datepicker>
@@ -34,5 +49,7 @@
     </div>
   </section>
   <br>
-  <button mat-raised-button (click)="onSave()">{{action}}</button>
+  <mat-card-actions>
+    <button mat-raised-button (click)="onSave()">{{action}}</button>
+  </mat-card-actions>
 </mat-card>

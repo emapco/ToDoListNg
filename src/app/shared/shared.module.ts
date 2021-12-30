@@ -24,6 +24,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {AppRoutingModule} from "./app-routing.module";
 import {FormatDateDisplayPipe} from "./format-date-display.pipe";
 import {FormatTimeDisplayPipe} from "./format-time-display.pipe";
+import { FormatTextDisplayPipe } from './format-description-display.pipe';
 
 
 
@@ -55,6 +56,7 @@ import {FormatTimeDisplayPipe} from "./format-time-display.pipe";
   declarations: [
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
+    FormatTextDisplayPipe,
   ],
   exports: [
     CommonModule,
@@ -81,10 +83,12 @@ import {FormatTimeDisplayPipe} from "./format-time-display.pipe";
     AppRoutingModule,
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
+    FormatTextDisplayPipe,
   ],
   providers: [
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
+    FormatTextDisplayPipe,
   ]
 })
 export class SharedModule { }
