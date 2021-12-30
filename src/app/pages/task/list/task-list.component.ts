@@ -5,7 +5,7 @@ import {BackendService} from "../../../core/backend.service";
 import {TaskService} from "../../../core/task.service";
 import {Filter} from '../../../shared/app-enums';
 
-interface filter {
+interface FilterType {
   initDate: number,
   endDate: number,
   option: number
@@ -26,6 +26,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
   private _tasks: Task[] = [];
   private _selectedTasks: Task[] = [];
   private _displayTask: Task | undefined;
+  private _filterType: FilterType = {
+    initDate: 0,
+    endDate: 0,
+    option: Filter.all
+  }
 
   constructor(private backend: BackendService,
               private taskService: TaskService) {
@@ -40,11 +45,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
         this._selectedTasks.splice(0, this._selectedTasks.length);
         this._displayTask = undefined;
       });
+    // subscription for when a filter is applied to the tasks
     this._taskFilterSubscription = this.taskService.filterAppliedAnnounced.subscribe(
-      async (filter: filter) => {
+      async (filter: FilterType) => {
+        this._filterType = filter;
         await this.updateTasks();
-        if (filter.option !== Filter.all)
-          this._tasks = this._tasks.filter(task => (filter.initDate < task.date && task.date < filter.endDate));
       }
     )
   }
@@ -67,9 +72,18 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this._isSelectedAll = false;
     this._selectedTasks.splice(0, this._selectedTasks.length);
     this._tasks.splice(0, this._tasks.length);
-    this.backend.tasks.forEach((task: Task) => {
-      this._tasks.push(Task.fromSelfCopy(task)); // makes copies so that backend reflects the database
-    });
+    if (this._filterType.option === Filter.all ) {
+      this.backend.tasks.forEach((task: Task) => {
+        // make a separate copy so that backend reflects the database
+          this._tasks.push(Task.fromSelfCopy(task));
+      });
+    } else {
+      this.backend.tasks.forEach((task: Task) => {
+        if (this._filterType.initDate < task.date && task.date < this._filterType.endDate) {
+          this._tasks.push(Task.fromSelfCopy(task));
+        }
+      });
+    }
   }
 
   /**

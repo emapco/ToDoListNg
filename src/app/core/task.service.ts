@@ -34,8 +34,8 @@ export class TaskService {
     this._filterAppliedAnnouncedSource.next(filter);
   }
 
-  async filterTasks(option: number): Promise<void> {
-    if (option ===Filter.all) {
+  async getFilterTaskParameters(option: number): Promise<void> {
+    if (option === Filter.all) { // exit guard for when no filter is applied
       this.announceFilterApplied({
         option: option
       });
@@ -49,6 +49,7 @@ export class TaskService {
     let tomorrow: Date | number = new Date();
     tomorrow.setDate(tomorrow.getDate()+1);
     tomorrow = new Date(tomorrow.toDateString()).getTime();  // remove time from date
+    let msWeek: number = (1000 * 60 * 60 * 24 * 7);
     switch (option) {
       case this.FilterEnum.today:
         initDate = today;
@@ -56,7 +57,7 @@ export class TaskService {
         break;
       case this.FilterEnum.nextWeek:
         initDate = now;
-        endDate = tomorrow + (1000 * 60 * 60 * 24 * 7) * 2; // + ms in a week
+        endDate = tomorrow + msWeek * 2;
         break;
       case this.FilterEnum.due:
         initDate = now;

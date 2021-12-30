@@ -14,6 +14,6 @@ export class MainSidebarComponent {
               private taskService: TaskService) { }
 
   async onTaskFilter(option: number) {
-    await this.taskService.filterTasks(option);
+    await this.taskService.getFilterTaskParameters(option);
   }
 }
