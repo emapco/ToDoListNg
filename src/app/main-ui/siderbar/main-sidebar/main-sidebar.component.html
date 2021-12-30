@@ -1,6 +1,12 @@
 <section *ngIf="authorization.isAuthenticated">
-  <mat-list-item>Tasks Due Today</mat-list-item>
-  <mat-list-item>Tasks Due in <br>7 Days</mat-list-item>
-  <mat-list-item>Tasks Past Due</mat-list-item>
-  <mat-list-item routerLink="/tasks" routerLinkActive="active">All Tasks</mat-list-item>
+  <mat-list-item
+    (click)="onTaskFilter(FilterEnum.today)">Tasks Due Today</mat-list-item>
+  <mat-list-item
+    (click)="onTaskFilter(FilterEnum.nextWeek)">Tasks Due in <br>14 Days</mat-list-item>
+  <mat-list-item
+    (click)="onTaskFilter(FilterEnum.due)">Tasks Due</mat-list-item>
+  <mat-list-item
+    (click)="onTaskFilter(FilterEnum.pastDue)">Tasks Past Due</mat-list-item>
+  <mat-list-item
+    (click)="onTaskFilter(FilterEnum.all)" routerLink="/tasks" routerLinkActive="active">All Tasks</mat-list-item>
 </section>

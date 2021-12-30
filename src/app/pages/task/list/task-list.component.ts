@@ -3,6 +3,13 @@ import {Task} from "../../../task";
 import {Subscription} from "rxjs";
 import {BackendService} from "../../../core/backend.service";
 import {TaskService} from "../../../core/task.service";
+import {Filter} from '../../../shared/app-enums';
+
+interface filter {
+  initDate: number,
+  endDate: number,
+  option: number
+}
 
 @Component({
   selector: 'app-task-list',
@@ -15,6 +22,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   private _callToAction: string = 'Save Changes';
   private _taskListSubscription: Subscription;
   private _taskCloseSubscription: Subscription;
+  private _taskFilterSubscription: Subscription;
   private _tasks: Task[] = [];
   private _selectedTasks: Task[] = [];
   private _displayTask: Task | undefined;
@@ -32,6 +40,13 @@ export class TaskListComponent implements OnInit, OnDestroy {
         this._selectedTasks.splice(0, this._selectedTasks.length);
         this._displayTask = undefined;
       });
+    this._taskFilterSubscription = this.taskService.filterAppliedAnnounced.subscribe(
+      async (filter: filter) => {
+        await this.updateTasks();
+        if (filter.option !== Filter.all)
+          this._tasks = this._tasks.filter(task => (filter.initDate < task.date && task.date < filter.endDate));
+      }
+    )
   }
 
   async ngOnInit() {
@@ -53,7 +68,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this._selectedTasks.splice(0, this._selectedTasks.length);
     this._tasks.splice(0, this._tasks.length);
     this.backend.tasks.forEach((task: Task) => {
-      this._tasks.push(Task.fromSelfCopy(task));
+      this._tasks.push(Task.fromSelfCopy(task)); // makes copies so that backend reflects the database
     });
   }
 
@@ -72,7 +87,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
   /**
    * Updates selectedTasks array depending on the checked boxes.
    * Handles the selectAll checkbox logic
-   * Also handles the display of task details component
    * @param task
    * @param event
    */
@@ -89,10 +103,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
     // logic for task select and select all check box
     if (!isTaskChecked && this._isSelectedAll) {
-      // clear selectedAll since user unchecked an option
-      this.isSelectedAll = false;
-      // user checked all tasks thus set selectAll.
-    }else if (this._selectedTasks.length === this._tasks.length) {
+      this.isSelectedAll = false; // clear selectedAll since user unchecked an option
+    }else if (this._selectedTasks.length === this._tasks.length) { // all tasks selected thus set selectAll.
       this.isSelectedAll = true;
     }
     this.taskService.announceCloseNewTask();
