@@ -40,6 +40,7 @@ export class BackendService {
   }
 
   async newTask(task: Task) {
+    await this.auth.verifyTokens();
     this.api.post(task).subscribe(
       (response: any) => {
         if (this.wasCallSuccessful(response.status, response.statusText)) {
@@ -51,6 +52,7 @@ export class BackendService {
   }
 
   async editedTask(task: Task) {
+    await this.auth.verifyTokens();
     this.api.put(task).subscribe(
       (response: any) => {
         if (this.wasCallSuccessful(response.status, response.statusText)) {
@@ -62,6 +64,7 @@ export class BackendService {
   }
 
   async deleteTask(task: Task) {
+    await this.auth.verifyTokens();
     this.api.delete(task).subscribe(
       (response: any) => {
         if (this.wasCallSuccessful(response.status, response.statusText)) {
