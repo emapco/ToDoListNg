@@ -1,0 +1,23 @@
+@use '../../node_modules/@angular/material/index' as mat;
+
+@mixin background($theme) {
+  $color-config: mat.get-color-config($theme);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  app-header, footer, mat-drawer   {
+    background-color: mat.get-color-from-palette($accent) !important;
+  }
+
+  footer {
+    color: white !important;
+  }
+}
+
+@mixin theme($theme) {
+  $color-config: mat.get-color-config($theme);
+
+  @if $color-config != null {
+    @include background($theme);
+  }
+}

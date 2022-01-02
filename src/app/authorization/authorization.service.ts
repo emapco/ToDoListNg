@@ -3,12 +3,23 @@ import {DOCUMENT} from "@angular/common";
 import {CookieService} from "ngx-cookie-service";
 import jwt_decode from 'jwt-decode';
 
+
 const login_url: string = 'https://todolistng.auth.us-east-1.amazoncognito.com/' +
   'login?client_id=6b4oshakbeu9tl76j2b0p9e8ds&response_type=token&scope=email+openid' +
-  '&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Ftasks';
+  '&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F';
 const logout_url: string = 'https://todolistng.auth.us-east-1.amazoncognito.com/' +
   'logout?client_id=6b4oshakbeu9tl76j2b0p9e8ds&response_type=token' +
   '&logout_uri=http%3A%2F%2Flocalhost%3A4200%2F';
+
+
+/*
+const login_url: string = 'https://todolistng.auth.us-east-1.amazoncognito.com/' +
+  'login?client_id=6b4oshakbeu9tl76j2b0p9e8ds&response_type=token&scope=email+openid' +
+  '&redirect_uri=https%3A%2F%2Fecortes.me%2Ftodolistng%2F';
+const logout_url: string = 'https://todolistng.auth.us-east-1.amazoncognito.com/' +
+  'logout?client_id=6b4oshakbeu9tl76j2b0p9e8ds&response_type=token' +
+  '&logout_uri=https%3A%2F%2Fecortes.me%2Ftodolistng%2F';
+ */
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +30,8 @@ export class AuthorizationService {
   private _id_token: string = '';
 
   constructor(@Inject(DOCUMENT) private document: Document,
-              private cookie: CookieService) { }
+              private cookie: CookieService) {
+  }
 
   /**
    * Gets tokens if recently logged in and stores them in cookies
@@ -36,7 +48,12 @@ export class AuthorizationService {
         let link = window.location.href;
         // extract the different tokens after logging in
         this._access_token = AuthorizationService._getTokenFromUrl(link, '&access_token=');
-        this._id_token = AuthorizationService._getTokenFromUrl(link, '#id_token=');
+        if (this._access_token) {
+          this._id_token = AuthorizationService._getTokenFromUrl(link, '#id_token=');
+        } else {
+          this._access_token = AuthorizationService._getTokenFromUrl(link, '#access_token=');
+          this._id_token = AuthorizationService._getTokenFromUrl(link, '&id_token=');
+        }
       }
       let options = {expires: 1, secure: true, sameSite: 'Strict'} as const;
       this.cookie.set('accessTokenCookie', this._access_token, options);
@@ -57,7 +74,7 @@ export class AuthorizationService {
     try {
       let accessDecodedToken = this.decodeToken(this._access_token);
       let idDecodedToken = this.decodeToken(this._id_token);
-      let time = Math.round(new Date().getTime()/1000);
+      let time = Math.round(new Date().getTime() / 1000);
       if (accessDecodedToken.exp < time || idDecodedToken.exp < time) {
         throw new Error("Token not valid!");
       }
@@ -76,8 +93,7 @@ export class AuthorizationService {
     let obj;
     try {
       obj = jwt_decode(token);
-    }
-    catch {
+    } catch {
       obj = '';
     }
     return obj;

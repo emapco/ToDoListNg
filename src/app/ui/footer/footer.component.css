@@ -7,8 +7,7 @@ footer {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  background-color: #212529;
-  color: white;
+  z-index: 100;
 }
 
 p {

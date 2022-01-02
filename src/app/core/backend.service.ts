@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Task} from "../task";
 import {Subject} from "rxjs";
 import {ApiService} from "./api.service";
@@ -47,7 +47,7 @@ export class BackendService {
           this.tasks.push(task);
           this.announceChange(task); // announce a change to task array
         } else
-            Task.taskNotSaved();  // task wasn't saved to database
+          Task.taskNotSaved();  // task wasn't saved to database
       });
   }
 

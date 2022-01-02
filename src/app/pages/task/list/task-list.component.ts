@@ -5,6 +5,8 @@ import {BackendService} from "../../../core/backend.service";
 import {TaskService} from "../../../core/task.service";
 import {Filter} from '../../../shared/app-enums';
 
+let async = require('async');
+
 interface FilterType {
   initDate: number,
   endDate: number,
@@ -154,9 +156,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
    * Invokes backend service to delete the task(s)
    */
   async onTaskDeleted() {
-    this._selectedTasks.forEach((task: Task) => {
-      this._displayTask = undefined;
-      this.backend.deleteTask(task);
+    this._displayTask = undefined;
+    async.forEachOf(this._selectedTasks, (task: Task) => {
+        this.backend.deleteTask(task);
     });
   }
 

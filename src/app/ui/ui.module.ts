@@ -28,4 +28,4 @@ import {AuthSidebarComponent} from "./siderbar/auth-sidebar/auth-sidebar.compone
     AuthSidebarComponent,
   ],
 })
-export class MainUIModule { }
+export class UiModule { }

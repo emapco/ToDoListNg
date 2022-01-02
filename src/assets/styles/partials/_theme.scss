@@ -1,0 +1,8 @@
+@use '../../../../node_modules/@angular/material/index' as mat;
+@import 'variables';
+
+// Define the default theme
+$light-theme: mat.define-light-theme($light-primary, $light-accent, $light-warn);
+
+// Define an alternate dark theme.
+$dark-theme: mat.define-dark-theme($dark-primary, $dark-accent, $dark-warn);

@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
-import {MainUIModule} from "./main-ui/main-u-i.module";
+import {UiModule} from "./ui/ui.module";
 import {PagesModule} from "./pages/pages.module";
 import {AuthorizationModule} from "./authorization/authorization.module";
-
 
 
 @NgModule({
@@ -14,7 +13,7 @@ import {AuthorizationModule} from "./authorization/authorization.module";
     AppComponent,
   ],
   imports: [
-    MainUIModule,
+    UiModule,
     PagesModule,
     SharedModule,
     CoreModule,
@@ -22,4 +21,5 @@ import {AuthorizationModule} from "./authorization/authorization.module";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

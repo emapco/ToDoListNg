@@ -1,25 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {SidebarService} from "./core/sidebar.service";
+import {Component} from '@angular/core';
 import {AuthorizationService} from "./authorization/authorization.service";
-import {BackendService} from "./core/backend.service";
+import {CookiesService} from "./core/cookies.service";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'ToDoListNg';
-  constructor(public sidebarServ: SidebarService,
-              public authorization: AuthorizationService) {
-  }
+  lightMode: boolean = false;
 
-  ngOnInit() {
+  constructor(public authorization: AuthorizationService,
+              private cookieService: CookiesService) {
     this.authorization.authenticate().then();
+    this.lightMode = this.cookieService.getMode();
   }
 
-  formatContent() {
-    return {'margin-left':
-        (this.sidebarServ.enableSidebar) ? this.sidebarServ.sidebarWidth : '0'}
+  lightModeToggled(status: boolean) {
+    this.lightMode = status;
+    this.cookieService.setMode(this.lightMode);
   }
 }
