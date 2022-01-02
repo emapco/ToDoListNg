@@ -4,13 +4,18 @@
   $color-config: mat.get-color-config($theme);
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
 
-  app-header, footer, mat-drawer   {
+  app-header, footer, mat-drawer {
     background-color: mat.get-color-from-palette($accent) !important;
   }
 
-  footer {
-    color: white !important;
+  input {
+    background-color: transparent;
+  }
+
+  .ngx-timepicker-control__arrow {
+    color: white;
   }
 }
 

@@ -20,7 +20,7 @@ app-header {
 
 .app-container, .sidenav {
   padding-top: 5vh;
-  min-height: calc(100vh - 4.9vh);
+  min-height: calc(100vh - 3.3vh);
 }
 
 .app-container {

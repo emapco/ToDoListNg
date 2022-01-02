@@ -2,7 +2,7 @@
   <app-header (menuToggled)="drawer.toggle()" [lightMode]="lightMode"
               (lightModeToggled)="lightModeToggled($event)"></app-header>
   <mat-drawer-container class="app-container" autosize>
-    <mat-drawer #drawer mode="side" class="sidenav">
+    <mat-drawer #drawer opened mode="side" class="sidenav">
       <app-sidebar></app-sidebar>
     </mat-drawer>
     <div class="content" role="main">
@@ -11,4 +11,3 @@
   </mat-drawer-container>
   <app-footer></app-footer>
 </div>
-

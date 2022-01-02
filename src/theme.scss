@@ -5,11 +5,11 @@
 @include mat.core();
 
 // Include the default theme styles.
-@include mat.all-component-colors($light-theme);
+@include mat.all-component-themes($light-theme);
 @include app.theme($light-theme);
 
 // Include the alternative theme styles inside of a block with a CSS class.
 .dark-theme {
-  @include mat.all-component-colors($dark-theme);
+  @include mat.all-component-themes($dark-theme);
   @include app.theme($dark-theme);
 }

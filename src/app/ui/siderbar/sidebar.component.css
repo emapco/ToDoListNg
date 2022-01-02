@@ -1,7 +1,0 @@
-#container {
-  width: 10em;
-  z-index: 1;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-}
