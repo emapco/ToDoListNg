@@ -19,12 +19,14 @@ interface FilterType {
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  private _isSelectedAll: boolean = false;
+  public filterToggle: boolean = false;
+  public rowHeight: string = '3em';
   private _callToActionHeader: string = 'Task Detail';
   private _callToAction: string = 'Save Changes';
   private _taskListSubscription: Subscription;
   private _taskCloseSubscription: Subscription;
   private _taskFilterSubscription: Subscription;
+  private _isSelectedAll: boolean = false;
   private _tasks: Task[] = [];
   private _selectedTasks: Task[] = [];
   private _displayTask: Task | undefined;
@@ -44,8 +46,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
     // subscription for when the edit task needs to be closed
     this._taskCloseSubscription = this.taskService.closeEditTaskAnnounced.subscribe(
       () => {
+        // clear the selected tasks array
         this._selectedTasks.splice(0, this._selectedTasks.length);
+        // remove edit task display and clear selectedAll checkbox
         this._displayTask = undefined;
+        this._isSelectedAll = false;
       });
     // subscription for when a filter is applied to the tasks
     this._taskFilterSubscription = this.taskService.filterAppliedAnnounced.subscribe(
@@ -74,6 +79,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this._isSelectedAll = false;
     this._selectedTasks.splice(0, this._selectedTasks.length);
     this._tasks.splice(0, this._tasks.length);
+    // if not filter is applied then copy each else filter copy based on dates
     if (this._filterType.option === Filter.all ) {
       this.backend.tasks.forEach((task: Task) => {
         // make a separate copy so that backend reflects the database
@@ -86,6 +92,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
         }
       });
     }
+    this.filterToggle = !this.filterToggle;  // used to trigger the page filter
   }
 
   /**
@@ -132,8 +139,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
    * @param isTaskChecked
    */
   displayTaskDetail(isTaskChecked: boolean) {
-    let areOtherTasksSelected: boolean = this._selectedTasks.length !== 1;
-    if (areOtherTasksSelected) {
+    if (this._selectedTasks.length !== 1) {
       this._displayTask = undefined;
     } else {
       this._displayTask = this._selectedTasks[0];

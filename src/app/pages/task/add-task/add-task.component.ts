@@ -33,7 +33,7 @@ export class AddTaskComponent {
    * @param task
    */
   async onTaskSave(task: Task) {
-    if (task.title && task.description) {
+    if (task.title || task.description) {
       await this.backend.newTask(task);
     }
     this.taskService.toggleIsNewTaskSelect();

@@ -1,7 +1,11 @@
+<mat-paginator #page [length]="tasks.length"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 20]"
+               aria-label="Select page">
+</mat-paginator>
 <app-remove-task (taskDeleted)="onTaskDeleted()"></app-remove-task>
-
 <section>
-  <mat-grid-list cols="4" rowHeight="6:1">
+  <mat-grid-list cols="4" [rowHeight]="rowHeight">
     <mat-grid-tile-header>
       <mat-grid-tile>
         <mat-checkbox [(ngModel)]="isSelectedAll" (change)="onSelectAll()"></mat-checkbox>
@@ -20,8 +24,8 @@
 </section>
 <mat-divider>
 </mat-divider>
-<section *ngFor="let task of tasks">
-  <mat-grid-list cols="4" rowHeight="5:1">
+<section *ngFor="let task of tasks | pageFilter:page.pageIndex:page.pageSize:filterToggle">
+  <mat-grid-list cols="4" [rowHeight]="rowHeight">
     <mat-grid-tile>
       <mat-checkbox [checked]="isTaskSelected(task)" (change)="onSelectTask(task, $event)"></mat-checkbox>
     </mat-grid-tile>

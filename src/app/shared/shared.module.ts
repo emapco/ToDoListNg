@@ -25,6 +25,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormatDateDisplayPipe} from "./format-date-display.pipe";
 import {FormatTimeDisplayPipe} from "./format-time-display.pipe";
 import { FormatTextDisplayPipe } from './format-description-display.pipe';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { PageFilterPipe } from './page-filter.pipe';
 
 
 
@@ -49,6 +51,7 @@ import { FormatTextDisplayPipe } from './format-description-display.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatPaginatorModule,
     NgxMaterialTimepickerModule,
     HttpClientModule,
     AppRoutingModule,
@@ -57,6 +60,7 @@ import { FormatTextDisplayPipe } from './format-description-display.pipe';
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
     FormatTextDisplayPipe,
+    PageFilterPipe,
   ],
   exports: [
     CommonModule,
@@ -78,17 +82,20 @@ import { FormatTextDisplayPipe } from './format-description-display.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatPaginatorModule,
     NgxMaterialTimepickerModule,
     HttpClientModule,
     AppRoutingModule,
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
     FormatTextDisplayPipe,
+    PageFilterPipe,
   ],
   providers: [
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
     FormatTextDisplayPipe,
+    PageFilterPipe,
   ]
 })
 export class SharedModule { }
