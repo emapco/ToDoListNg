@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {SharedModule} from "../shared/shared.module";
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './siderbar/sidebar.component';
-import { MainSidebarComponent } from './siderbar/main-sidebar/main-sidebar.component';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {SidebarComponent} from './siderbar/sidebar.component';
+import {MainSidebarComponent} from './siderbar/main-sidebar/main-sidebar.component';
 import {AuthSidebarComponent} from "./siderbar/auth-sidebar/auth-sidebar.component";
-
 
 
 @NgModule({
@@ -28,4 +27,4 @@ import {AuthSidebarComponent} from "./siderbar/auth-sidebar/auth-sidebar.compone
     AuthSidebarComponent,
   ],
 })
-export class UiModule { }
+export class UiModule {}

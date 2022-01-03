@@ -9,7 +9,7 @@ import {TaskService} from "../../../core/task.service";
 export class DeleteTaskComponent {
   @Output() taskDeleted = new EventEmitter<any>();
 
-  constructor(private taskService: TaskService) { }
+  constructor() { }
 
   onDelete() {
     this.taskDeleted.emit();

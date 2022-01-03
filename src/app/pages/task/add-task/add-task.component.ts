@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Task} from "../../../task";
 import {BackendService} from "../../../core/backend.service";
 import {TaskService} from "../../../core/task.service";
+import {MatDialog} from "@angular/material/dialog";
+import {TaskDetailComponent} from "../detail/task-detail.component";
 
 @Component({
   selector: 'app-add-task',
@@ -9,21 +11,21 @@ import {TaskService} from "../../../core/task.service";
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
-  private _newTask: Task = new Task();
+  private _newTask: Task | undefined;
   private _callToAction: string = 'Add Task';
   private _callToActionHeader: string = 'New Task';
+  public showDetail: boolean = false;
 
-  constructor(private backend: BackendService,
-              private taskService: TaskService) {
+  constructor(private backend: BackendService) {
   }
 
   /**
-   * Opens child TaskDetail and announces that
-   * edit task component needs to be closed
+   * Opens child TaskDetailComponent and
+   * populates it with a new instance of Task.
    */
   onClickAddButton() {
     this._newTask = new Task();
-    this.taskService.announceCloseEditTask();
+    this.showDetail = !this.showDetail;
   }
 
   /**
@@ -36,17 +38,20 @@ export class AddTaskComponent {
     if (task.title || task.description) {
       await this.backend.newTask(task);
     }
-    this.taskService.toggleIsNewTaskSelect();
+    this.showDetail = false;
   }
 
   /**
-   * Display new task if service property is set.
+   * Event handler for event emitted by child TaskDetailComponent
+   * Removes the TaskDetailComponent from the view.
    */
-  get addNewTaskEnabled(): boolean {
-    return this.taskService.isNewTaskSelected;
+  async onTaskCancelled() {
+    this.showDetail = false;
   }
 
   get newTask(): Task {
+    if (!this._newTask)
+      return new Task();
     return this._newTask;
   }
 

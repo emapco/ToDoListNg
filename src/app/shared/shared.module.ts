@@ -24,9 +24,9 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {AppRoutingModule} from "./app-routing.module";
 import {FormatDateDisplayPipe} from "./format-date-display.pipe";
 import {FormatTimeDisplayPipe} from "./format-time-display.pipe";
-import { FormatTextDisplayPipe } from './format-description-display.pipe';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { PageFilterPipe } from './page-filter.pipe';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
@@ -51,6 +51,7 @@ import { PageFilterPipe } from './page-filter.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatTooltipModule,
     MatPaginatorModule,
     NgxMaterialTimepickerModule,
     HttpClientModule,
@@ -59,7 +60,6 @@ import { PageFilterPipe } from './page-filter.pipe';
   declarations: [
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
-    FormatTextDisplayPipe,
     PageFilterPipe,
   ],
   exports: [
@@ -83,18 +83,17 @@ import { PageFilterPipe } from './page-filter.pipe';
     MatNativeDateModule,
     MatRippleModule,
     MatPaginatorModule,
+    MatTooltipModule,
     NgxMaterialTimepickerModule,
     HttpClientModule,
     AppRoutingModule,
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
-    FormatTextDisplayPipe,
     PageFilterPipe,
   ],
   providers: [
     FormatDateDisplayPipe,
     FormatTimeDisplayPipe,
-    FormatTextDisplayPipe,
     PageFilterPipe,
   ]
 })

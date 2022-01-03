@@ -1,22 +1,24 @@
 <mat-paginator #page [length]="tasks.length"
                [pageSize]="10"
-               [pageSizeOptions]="[5, 10, 20]"
+               [pageSizeOptions]="[5, 10, 20, 50]"
                aria-label="Select page">
 </mat-paginator>
 <app-remove-task (taskDeleted)="onTaskDeleted()"></app-remove-task>
+<!-- task list header -->
 <section>
-  <mat-grid-list cols="4" [rowHeight]="rowHeight">
+  <mat-grid-list cols="13" rowHeight="2.5em">
     <mat-grid-tile-header>
-      <mat-grid-tile>
-        <mat-checkbox [(ngModel)]="isSelectedAll" (change)="onSelectAll()"></mat-checkbox>
+      <mat-grid-tile colspan="1">
+        <mat-checkbox color="primary" [(ngModel)]="isSelectedAll"
+                      (change)="onSelectAll()"></mat-checkbox>
       </mat-grid-tile>
-      <mat-grid-tile>
+      <mat-grid-tile colspan="3">
         <u><b>Title</b></u>
       </mat-grid-tile>
-      <mat-grid-tile>
+      <mat-grid-tile colspan="6">
         <u><b>Description</b></u>
       </mat-grid-tile>
-      <mat-grid-tile>
+      <mat-grid-tile colspan="3">
         <u><b>Date</b></u>
       </mat-grid-tile>
     </mat-grid-tile-header>
@@ -24,18 +26,20 @@
 </section>
 <mat-divider>
 </mat-divider>
-<section *ngFor="let task of tasks | pageFilter:page.pageIndex:page.pageSize:filterToggle">
-  <mat-grid-list cols="4" [rowHeight]="rowHeight">
-    <mat-grid-tile>
-      <mat-checkbox [checked]="isTaskSelected(task)" (change)="onSelectTask(task, $event)"></mat-checkbox>
+<!-- task list elements -->
+<section *ngFor="let task of tasks | pageFilter:page.pageIndex:page.pageSize">
+  <mat-grid-list cols="13" rowHeight="4em">
+    <mat-grid-tile colspan="1">
+      <mat-checkbox color="primary" [checked]="isTaskSelected(task)"
+                    (change)="onTaskChecked(task, $event)"></mat-checkbox>
     </mat-grid-tile>
-    <mat-grid-tile>
-      {{task.title | formatTextDisplay}}
+    <mat-grid-tile colspan="3" (click)="onTaskClicked(task)">
+      <p class="text">{{task.title}}</p>
     </mat-grid-tile>
-    <mat-grid-tile>
-      {{task.description | formatTextDisplay}}
+    <mat-grid-tile colspan="6" (click)="onTaskClicked(task)">
+      <p class="text">{{task.description}}</p>
     </mat-grid-tile>
-    <mat-grid-tile>
+    <mat-grid-tile colspan="3" (click)="onTaskClicked(task)">
       {{task.date | formatDateDisplay}}
     </mat-grid-tile>
   </mat-grid-list>
@@ -43,7 +47,4 @@
   </mat-divider>
 </section>
 <app-add-task></app-add-task>
-<app-task-detail *ngIf="displayTask" [task]="displayTask" (taskSaved)="onTaskSaved($event)"
-                 [action]="callToAction" [header]="callToActionHeader"></app-task-detail>
-
 

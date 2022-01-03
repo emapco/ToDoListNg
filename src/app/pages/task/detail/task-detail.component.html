@@ -1,11 +1,12 @@
-<mat-card class="main">
+<mat-card>
   <mat-card-title>{{header}}</mat-card-title>
   <br>
   <section>
     <h4>Title:
       <mat-icon (click)="toggleEditTitle()">border_color</mat-icon>
     </h4>
-    <mat-card-content *ngIf="!enableEditTitle">
+    <mat-card-content class="text" *ngIf="!enableEditTitle"
+                      (click)="toggleEditTitle()">
       {{editTask.title}}
     </mat-card-content>
     <mat-form-field appearance="fill" *ngIf="enableEditTitle">
@@ -19,7 +20,8 @@
     <h4>Description:
       <mat-icon (click)="toggleEditDescription()">border_color</mat-icon>
     </h4>
-    <mat-card-content *ngIf="!enableEditDescription">
+    <mat-card-content class="text" *ngIf="!enableEditDescription"
+                      (click)="toggleEditDescription()">
       {{editTask.description}}
     </mat-card-content>
     <mat-form-field appearance="fill" *ngIf="enableEditDescription">
@@ -28,13 +30,13 @@
                 cdkAutosizeMinRows="1"
                 cdkAutosizeMaxRows="10"></textarea>
     </mat-form-field>
-
   </section>
   <section>
     <h4>Date:
       <mat-icon (click)="toggleEditDate()">border_color</mat-icon>
     </h4>
-    <p *ngIf="!enableEditDate">{{editTask.date | formatDateDisplay}}</p>
+    <p *ngIf="!enableEditDate"
+       (click)="toggleEditDate()">{{editTask.date | formatDateDisplay}}</p>
     <div *ngIf="enableEditDate">
       <mat-form-field>
         <input matInput [matDatepicker]="picker" (dateChange)="updateDate($event)">
@@ -42,7 +44,8 @@
         <mat-datepicker #picker [startAt]="editTask.date"></mat-datepicker>
       </mat-form-field>
       <div class="timepicker">
-        <ngx-timepicker-field #timepicker [defaultTime]="formatTimeDisplay.transform(editTask.date)"
+        <ngx-timepicker-field [controlOnly]=true #timepicker
+                              [defaultTime]="formatTimeDisplay.transform(editTask.date)"
                               (timeChanged)="updateTime(timepicker.timepickerTime)">
         </ngx-timepicker-field>
       </div>
@@ -50,6 +53,7 @@
   </section>
   <br>
   <mat-card-actions>
-    <button mat-raised-button (click)="onSave()">{{action}}</button>
+    <button mat-flat-button color="primary" (click)="onSave()">{{action}}</button>
   </mat-card-actions>
 </mat-card>
+

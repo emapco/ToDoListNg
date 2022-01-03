@@ -7,35 +7,20 @@ import {Filter} from '../shared/app-enums';
 })
 export class TaskService {
   private FilterEnum = Filter;
-  private _isEditTaskSelected: boolean = false;
-  private _isNewTaskSelected: boolean = false;
 
   constructor() { }
 
   // observable sources
-  private _closeEditTaskAnnouncedSource = new Subject();
   private _filterAppliedAnnouncedSource = new Subject<any>();
   // observable stream
-  closeEditTaskAnnounced = this._closeEditTaskAnnouncedSource.asObservable();
   filterAppliedAnnounced = this._filterAppliedAnnouncedSource.asObservable();
-
-  announceCloseEditTask(): void {
-    this.toggleIsNewTaskSelect();
-    this._isEditTaskSelected = false;
-    this._closeEditTaskAnnouncedSource.next(undefined);
-  }
-
-  announceCloseNewTask(): void {
-    this._isNewTaskSelected = false;
-    this.toggleIsTaskSelect();
-  }
 
   announceFilterApplied(filter: any) {
     this._filterAppliedAnnouncedSource.next(filter);
   }
 
-  async getFilterTaskParameters(option: number): Promise<void> {
-    if (option === Filter.all) { // exit guard for when no filter is applied
+  async getFilterTaskParameters(option: number): Promise<any> {
+    if (option === Filter.all) { // exit guard for when no specific filter is applied
       this.announceFilterApplied({
         option: option
       });
@@ -73,21 +58,5 @@ export class TaskService {
       endDate: endDate,
       option: option
     });
-  }
-
-  toggleIsTaskSelect() {
-    this._isEditTaskSelected = !this._isEditTaskSelected;
-  }
-
-  toggleIsNewTaskSelect() {
-    this._isNewTaskSelected = !this._isNewTaskSelected;
-  }
-
-  get isNewTaskSelected(): boolean {
-    return this._isNewTaskSelected;
-  }
-
-  set isNewTaskSelected(value: boolean) {
-    this._isNewTaskSelected = value;
   }
 }

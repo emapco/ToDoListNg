@@ -3,16 +3,6 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 h1 { font-size: 32px !important; }
 
-.mat-checkbox-checked .mat-checkbox-background,
-.mat-checkbox-indeterminate .mat-checkbox-background {
-  background-color: #212529 !important;
-}
-
-
-.mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
-  background-color: #212529 !important;
-}
-
 mat-list-item {
   color: white !important;
 }

@@ -5,6 +5,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {TaskListComponent} from "./list/task-list.component";
 import {TaskDetailComponent} from "./detail/task-detail.component";
 import {AddTaskComponent} from './add-task/add-task.component';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {AddTaskComponent} from './add-task/add-task.component';
     DeleteTaskComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    MatDialogModule
   ],
   exports: [
     TaskListComponent,
@@ -23,7 +25,11 @@ import {AddTaskComponent} from './add-task/add-task.component';
     AddTaskComponent,
     DeleteTaskComponent,
   ],
-  providers: [],
+providers: [
+  MatDialog,
+  { provide: MatDialogRef, useValue: {} },
+  {provide: MAT_DIALOG_DATA, useValue: []},
+],
 })
 export class TaskModule {
 }

@@ -1,8 +1,9 @@
-.main {
-  margin-left: 2em;
-  width: 40%;
-}
-
 .timepicker {
   width: 0 !important;
+}
+
+.text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

@@ -13,3 +13,8 @@
   @include mat.all-component-themes($dark-theme);
   @include app.theme($dark-theme);
 }
+
+.light-theme {
+  @include mat.all-component-themes($light-theme);
+  @include app.theme($light-theme);
+}

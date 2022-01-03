@@ -39,9 +39,7 @@ const routes: Routes = [  // const for defining routes
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, {
-      onSameUrlNavigation: 'reload'
-    })
+    RouterModule.forRoot(routes),
   ],
   exports: [RouterModule]
 })

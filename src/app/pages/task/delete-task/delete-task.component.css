@@ -1,11 +1,9 @@
 mat-grid-list {
   margin: 0 0 !important;
   padding-top: 0 !important;
-
 }
 
 mat-grid-tile {
   margin: 0 0 !important;
+  overflow: visible !important;
 }
-
-

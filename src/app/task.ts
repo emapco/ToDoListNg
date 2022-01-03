@@ -13,8 +13,7 @@ export class Task {
     this.description = (description) ? description : '';
     if (date) {
       this.date = date;
-    }
-    else {
+    } else {
       let oneHour: number = (60*60*1000)
       this.date = new Date().getTime() + oneHour;
     }
@@ -36,13 +35,6 @@ export class Task {
   }
 
   /**
-   * Decrements task id since task could not be saved to the database
-   */
-  static taskNotSaved() {
-    this.nextID--;
-  }
-
-  /**
    * Copies the parameter's properties to the instance
    * that called the method.
    * @param task
@@ -53,5 +45,12 @@ export class Task {
     this.title = task.title;
     this.description = task.description;
     this.date = task.date;
+  }
+
+  /**
+   * Decrements task id since task could not be saved to the database
+   */
+  static taskNotSaved() {
+    this.nextID--;
   }
 }

@@ -1,0 +1,50 @@
+mat-grid-list {
+  margin: 0 0 !important;
+  padding-top: 0 !important;
+}
+
+mat-grid-tile {
+  margin: 0 0 !important;
+  overflow: visible !important;
+}
+
+.main {
+  width: 25%;
+}
+
+/* Width depending on user's screen for TaskDetailComponent continer div */
+@media only screen and (max-width: 1400px) {
+  .main {
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .main {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .main {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .main {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main  {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .main, :host  {
+    width: 90%;
+  }
+}
