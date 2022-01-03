@@ -8,11 +8,20 @@ export class CookiesService {
 
   constructor(private cookie: CookieService) { }
 
-  setMode(isLightMode: boolean): void {
+  setDisplayMode(isLightMode: boolean ): void {
+
     this.cookie.set('isLightMode', String(isLightMode));
   }
 
-  getMode(): boolean {
+  getDisplayMode(): boolean {
     return (this.cookie.get('isLightMode') === 'true');
+  }
+
+  setSidebarMode(isSidebarOpen: boolean): void {
+    this.cookie.set('isSidebarOpen', String(isSidebarOpen));
+  }
+
+  getSidebarMode(): boolean {
+    return (this.cookie.get('isSidebarOpen') === 'true');
   }
 }

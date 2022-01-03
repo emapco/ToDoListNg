@@ -1,8 +1,8 @@
-<div [ngClass]="{'dark-theme': !lightMode}">
-  <app-header (menuToggled)="drawer.toggle()" [lightMode]="lightMode"
+<div [ngClass]="{'dark-theme': !isLightMode}">
+  <app-header (menuToggled)="sidebarToggled()" [lightMode]="isLightMode"
               (lightModeToggled)="lightModeToggled($event)"></app-header>
   <mat-drawer-container class="app-container" autosize>
-    <mat-drawer #drawer opened mode="side" class="sidenav">
+    <mat-drawer [opened]="isSidebarOpen" mode="side" class="sidenav">
       <app-sidebar></app-sidebar>
     </mat-drawer>
     <div class="content" role="main">

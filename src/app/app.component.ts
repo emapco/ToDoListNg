@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthorizationService} from "./authorization/authorization.service";
 import {CookiesService} from "./core/cookies.service";
+import {OverlayContainer} from "@angular/cdk/overlay";
 
 
 @Component({
@@ -10,16 +11,33 @@ import {CookiesService} from "./core/cookies.service";
 })
 export class AppComponent {
   title = 'ToDoListNg';
-  lightMode: boolean = false;
+  isLightMode: boolean = false;
+  isSidebarOpen: boolean = true;
 
   constructor(public authorization: AuthorizationService,
-              private cookieService: CookiesService) {
+              private cookieService: CookiesService,
+              private overlayContainer: OverlayContainer) {
     this.authorization.authenticate().then();
-    this.lightMode = this.cookieService.getMode();
+    this.isLightMode = this.cookieService.getDisplayMode();
+    this.isSidebarOpen = this.cookieService.getSidebarMode();
   }
 
-  lightModeToggled(status: boolean) {
-    this.lightMode = status;
-    this.cookieService.setMode(this.lightMode);
+  async lightModeToggled(status: boolean) {
+    this.isLightMode = status;
+    this.cookieService.setDisplayMode(this.isLightMode);
+    // set overlay component (MatDialog) theme
+    const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
+    if (this.isLightMode) {
+      overlayContainerClasses.remove('dark-theme');
+      overlayContainerClasses.add('light-theme');
+    } else {
+      overlayContainerClasses.remove('light-theme');
+      overlayContainerClasses.add('dark-theme');
+    }
+  }
+
+  async sidebarToggled() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.cookieService.setSidebarMode(this.isSidebarOpen);
   }
 }
