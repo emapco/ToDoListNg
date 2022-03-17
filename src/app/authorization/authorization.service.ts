@@ -3,23 +3,21 @@ import {DOCUMENT} from "@angular/common";
 import {CookieService} from "ngx-cookie-service";
 import jwt_decode from 'jwt-decode';
 
-
+/*
 const login_url: string = 'https://todolistng.auth.us-east-1.amazoncognito.com/' +
   'login?client_id=6b4oshakbeu9tl76j2b0p9e8ds&response_type=token&scope=email+openid' +
   '&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2F';
 const logout_url: string = 'https://todolistng.auth.us-east-1.amazoncognito.com/' +
   'logout?client_id=6b4oshakbeu9tl76j2b0p9e8ds&response_type=token' +
   '&logout_uri=http%3A%2F%2Flocalhost%3A4200%2F';
+ */
 
-
-/*
 const login_url: string = 'https://todolistng.auth.us-east-1.amazoncognito.com/' +
   'login?client_id=6b4oshakbeu9tl76j2b0p9e8ds&response_type=token&scope=email+openid' +
-  '&redirect_uri=https%3A%2F%2Fecortes.me%2Ftodolistng%2F';
+  '&redirect_uri=https%3A%2F%2Fecortes.me%2Ftodolistng%2Ftasks';
 const logout_url: string = 'https://todolistng.auth.us-east-1.amazoncognito.com/' +
   'logout?client_id=6b4oshakbeu9tl76j2b0p9e8ds&response_type=token' +
   '&logout_uri=https%3A%2F%2Fecortes.me%2Ftodolistng%2F';
- */
 
 @Injectable({
   providedIn: 'root'
@@ -124,10 +122,11 @@ export class AuthorizationService {
   }
 
   /**
-   * Logs out user from AWS Cognito and clears the cookies
+   * Logs out user from AWS Cognito and clears the token cookies
    */
   logout(): void {
-    this.cookie.deleteAll();
+    this.cookie.delete('accessTokenCookie');
+    this.cookie.delete('idTokenCookie');
     this.document.location.href = logout_url;
   }
 

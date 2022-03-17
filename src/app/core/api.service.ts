@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {AuthorizationService} from "../authorization/authorization.service";
 import {Task} from '../task';
 
-const url: string = 'https://2j7u9kvmyb.execute-api.us-east-1.amazonaws.com/test/tasks'
-//const url: string = 'https://4axz1ies1f.execute-api.us-east-1.amazonaws.com/prod/tasks'
+//const url: string = 'https://2j7u9kvmyb.execute-api.us-east-1.amazonaws.com/test/tasks'
+const url: string = 'https://4axz1ies1f.execute-api.us-east-1.amazonaws.com/prod/tasks'
 let taskTableName = 'ToDoListNg_tasks';
 
 @Injectable({

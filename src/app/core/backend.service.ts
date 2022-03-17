@@ -16,7 +16,7 @@ export class BackendService {
       (response: any) => {
         let maxID: number = 0;
         response.Items.forEach((task: Task) => {
-          this._tasks.push(Task.fromSelfCopy(task));
+          this._tasks.push(Task.fromOtherCopy(task));
           if (task.id > maxID) maxID = task.id;
         });
         Task.nextID = maxID; // update id for new task instances

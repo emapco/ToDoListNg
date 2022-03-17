@@ -18,7 +18,8 @@ export class AppComponent {
               private cookieService: CookiesService,
               private overlayContainer: OverlayContainer) {
     this.authorization.authenticate().then();
-    this.isLightMode = this.cookieService.getDisplayMode();
+    // call toggled in order to set overlay theme
+    this.lightModeToggled(this.cookieService.getDisplayMode()).then();
     this.isSidebarOpen = this.cookieService.getSidebarMode();
   }
 

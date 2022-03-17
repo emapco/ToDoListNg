@@ -74,12 +74,12 @@ export class TaskListComponent implements OnInit, OnDestroy {
       async.forEachOf(this.backend.tasks, (task: Task) => {
         // make a separate copy so that backend tasks are unchanged
         // and reflect the database's state
-        this._tasks.push(Task.fromSelfCopy(task));
+        this._tasks.push(Task.fromOtherCopy(task));
       });
     } else {
       async.forEachOf(this.backend.tasks, (task: Task) => {
         if (this._filterType.initDate < task.date && task.date < this._filterType.endDate) {
-          this._tasks.push(Task.fromSelfCopy(task));
+          this._tasks.push(Task.fromOtherCopy(task));
         }
       });
     }

@@ -14,6 +14,7 @@ export class Task {
     if (date) {
       this.date = date;
     } else {
+      // set default time one hour ahead of current time
       let oneHour: number = (60*60*1000)
       this.date = new Date().getTime() + oneHour;
     }
@@ -24,7 +25,7 @@ export class Task {
    * Returns the new instance.
    * @param task
    */
-  static fromSelfCopy(task: Task) {
+  static fromOtherCopy(task: Task) {
     const copy = new Task();
     copy.id = task.id;
     copy.username = task.username;

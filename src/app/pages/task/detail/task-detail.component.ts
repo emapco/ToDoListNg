@@ -32,7 +32,7 @@ export class TaskDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._editTask = Task.fromSelfCopy(this.task);
+    this._editTask = Task.fromOtherCopy(this.task);
   }
 
   /**

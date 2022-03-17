@@ -22,6 +22,9 @@ export class CookiesService {
   }
 
   getSidebarMode(): boolean {
-    return (this.cookie.get('isSidebarOpen') === 'true');
+    let cookie = this.cookie.get('isSidebarOpen');
+    if (cookie === '')
+      return true; // cookie not set thus default set to true
+    return (cookie === 'true');
   }
 }
